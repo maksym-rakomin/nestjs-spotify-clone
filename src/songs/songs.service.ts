@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { Song } from './types';
 
 @Injectable()
 export class SongsService {
   // local db
   // local array
 
-  private readonly songs: string[] = [];
+  private readonly songs: Song[] = [];
 
-  create(song: string): string[] {
+  create(song: Song): Song[] {
     this.songs.push(song);
     return this.songs;
   }
 
-  findAll(): string[] {
+  findAll(): Song[] {
     return this.songs;
   }
 
