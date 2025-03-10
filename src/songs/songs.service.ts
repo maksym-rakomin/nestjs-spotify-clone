@@ -14,6 +14,8 @@ export class SongsService {
   }
 
   findAll(): Song[] {
+    // Errors comes while fetching the data form DB
+    throw new Error('Error form DB');
     return this.songs;
   }
 
