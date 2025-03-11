@@ -5,6 +5,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -13,10 +14,16 @@ import {
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song-dto';
 import { Song } from './types';
+import { Connection } from '../common/constants/connections';
 
 @Controller('songs')
 export class SongsController {
-  constructor(private songsService: SongsService) {}
+  constructor(
+    private songsService: SongsService,
+    @Inject('CONNECTION') private connection: Connection,
+  ) {
+    console.log('This is connection string', this.connection);
+  }
 
   @Post()
   create(@Body() createSongDTO: CreateSongDto): Song[] {
