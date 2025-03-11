@@ -6,7 +6,7 @@ export class AppService {
   constructor(
     private readonly devConfigService: DevConfigService,
     @Inject('CONFIG')
-    private config: { port: string; }
+    private config: { port: string },
   ) {}
 
   getHello(): string {
