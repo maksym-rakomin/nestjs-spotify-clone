@@ -1,7 +1,7 @@
 GET http://localhost:3000
 
 ### SEND FETCH SONGS REQUEST
-GET http://localhost:3000/songs
+GET http://localhost:3000/songs?page=1&limit=2&order=DESC&sortBy=title
 
 ### Find SONGS REQUEST
 GET http://localhost:3000/songs/1

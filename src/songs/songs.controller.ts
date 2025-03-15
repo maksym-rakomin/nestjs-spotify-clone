@@ -1,15 +1,16 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
-  HttpException,
   HttpStatus,
   Inject,
   Param,
   ParseIntPipe,
   Post,
   Put,
+  Query,
   Scope,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
@@ -18,6 +19,7 @@ import { Song } from './song.entity';
 import { Connection } from '../common/constants/connections';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateSongDto } from './dto/update-song-dto';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller({ path: 'songs', scope: Scope.REQUEST })
 export class SongsController {
@@ -34,16 +36,19 @@ export class SongsController {
   }
 
   @Get()
-  findAll(): Promise<Song[]> {
-    try {
-      return this.songsService.findAll();
-    } catch (error) {
-      throw new HttpException(
-        'Error form DB',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        { cause: error },
-      );
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query('sortBy', new DefaultValuePipe('id')) sortBy: string,
+    @Query('order', new DefaultValuePipe('ASC')) order: 'ASC' | 'DESC',
+  ): Promise<Pagination<Song>> {
+    const allowedSortFields = ['id', 'title', 'author', 'createdAt'];
+    if (!allowedSortFields.includes(sortBy)) {
+      sortBy = 'id';
     }
+
+    limit = limit > 100 ? 100 : limit;
+    return this.songsService.paginate({ page, limit }, sortBy, order);
   }
 
   @Get(':id')
