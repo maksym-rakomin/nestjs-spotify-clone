@@ -9,6 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as process from 'node:process';
 import { DataSource } from 'typeorm';
 import { Song } from './songs/song.entity';
+import { Artist } from './artists/artist.entity';
+import { User } from './users/user.entity';
 
 // Development configuration
 const devConfig = { port: 3000 };
@@ -24,7 +26,7 @@ const proConfig = { port: 4000 };
       port: 5432,
       type: 'postgres',
       password: process.env.DB_PASSWORD,
-      entities: [Song],
+      entities: [Song, Artist, User],
       synchronize: true,
     }),
     SongsModule,

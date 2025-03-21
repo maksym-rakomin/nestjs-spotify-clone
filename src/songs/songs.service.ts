@@ -9,12 +9,13 @@ import {
   paginate,
   Pagination,
 } from 'nestjs-typeorm-paginate';
+import { Artist } from '../artists/artist.entity';
 
 @Injectable({ scope: Scope.TRANSIENT })
 export class SongsService {
   constructor(
-    @InjectRepository(Song)
-    private songRepository: Repository<Song>,
+    @InjectRepository(Song) private songRepository: Repository<Song>,
+    @InjectRepository(Artist) private artistsRepository: Repository<Artist>,
   ) {}
 
   async create(songDTO: CreateSongDto): Promise<Song> {
@@ -25,6 +26,10 @@ export class SongsService {
     song.lyrics = songDTO.lyrics;
     song.releasedDate = songDTO.releasedDate;
 
+    // find all the artists on the based ids
+    // set relations with artists and song
+    song.artists = await this.artistsRepository.findByIds(songDTO.artists);
+
     return await this.songRepository.save(song);
   }
 
@@ -33,7 +38,10 @@ export class SongsService {
   }
 
   async findOne(id: number): Promise<Song | null> {
-    return await this.songRepository.findOneBy({ id });
+    return await this.songRepository.findOne({
+      where: { id },
+      relations: ['artists'],
+    });
   }
 
   async update(
@@ -54,7 +62,9 @@ export class SongsService {
   ): Promise<Pagination<Song>> {
     const queryBuilder = this.songRepository.createQueryBuilder('song');
 
-    queryBuilder.orderBy(`song.${sortBy}`, order);
+    queryBuilder
+      .leftJoinAndSelect('song.artists', 'artists') // подгрузка связанных артистов
+      .orderBy(`song.${sortBy}`, order);
 
     return paginate<Song>(queryBuilder, options);
   }
