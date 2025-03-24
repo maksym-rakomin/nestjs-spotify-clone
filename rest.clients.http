@@ -37,3 +37,14 @@ Content-Type: application/json
 
 ### Update SONGS REQUEST
 DELETE http://localhost:3000/songs/5
+
+
+### Create PLAYLIST REQUEST
+POST http://localhost:3000/playlists
+Content-Type: application/json
+
+{
+"name": "My Fav Songs",
+"user": 1,
+"songs": [10, 12, 13, 14]
+}
