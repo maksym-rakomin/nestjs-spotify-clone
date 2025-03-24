@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -17,6 +17,14 @@ export class UsersService {
     userDTO.password = await bcrypt.hash(userDTO.password, salt);
     const user = await this.userRepository.save(userDTO);
     delete (user as Partial<User>).password;
+    return user;
+  }
+
+  async findOne(data: Partial<User>): Promise<User> {
+    const user = await this.userRepository.findOneBy({ email: data.email });
+    if (!user) {
+      throw new UnauthorizedException('Could not find user');
+    }
     return user;
   }
 }
