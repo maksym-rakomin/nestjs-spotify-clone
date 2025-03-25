@@ -10,12 +10,12 @@ GET http://localhost:3000/songs/14
 ### Create New SONGS REQUEST
 POST http://localhost:3000/songs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydGlzdEBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3NDI4Nzk0NTMsImV4cCI6MTc0Mjk2NTg1M30.JkOf3B5uqg5cGoVhomMUH9r3NtlGGIFlSiKRlU1W5Lc
 
 {
-  "title": "You for Me 13",
+  "title": "You for Me 12",
   "artists": [
-    1,
-    2
+    1
   ],
   "releasedDate": "2022-09-30",
   "duration": "02:45",
@@ -66,6 +66,26 @@ Content-Type: application/json
   "password": "123456"
 }
 
+### Create ARTIST
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "Artist",
+  "lastName": "doe",
+  "email": "artist@gmail.com",
+  "password": "123456"
+}
+
+### login ARTIST
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "artist@gmail.com",
+  "password": "123456"
+}
+
 ### Test login user
 POST http://localhost:3000/auth/login
 Content-Type: application/json
@@ -77,4 +97,4 @@ Content-Type: application/json
 
 ### GET profile
 GET http://localhost:3000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwic3ViIjoxLCJpYXQiOjE3NDI4Mjk2NjUsImV4cCI6MTc0MjkxNjA2NX0.QTEtDJBrPwJ5bA91eX9vp9K0WEK-uIhus9__aI--ozA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydGlzdEBnbWFpbC5jb20iLCJ1c2VySWQiOjIsImFydGlzdElkIjoxLCJpYXQiOjE3NDI4Nzk0NTMsImV4cCI6MTc0Mjk2NTg1M30.JkOf3B5uqg5cGoVhomMUH9r3NtlGGIFlSiKRlU1W5Lc

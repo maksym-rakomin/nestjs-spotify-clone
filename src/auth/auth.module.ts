@@ -7,6 +7,7 @@ import { authConstants } from './auth.constants';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt-strategy';
 import { JwtAuthGuard } from './jwt-guard';
+import { ArtistsModule } from '../artists/artists.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { JwtAuthGuard } from './jwt-guard';
       signOptions: { expiresIn: '1d' },
     }),
     PassportModule,
+    ArtistsModule,
   ],
   providers: [AuthService, JwtStrategy, JwtAuthGuard],
   controllers: [AuthController],
