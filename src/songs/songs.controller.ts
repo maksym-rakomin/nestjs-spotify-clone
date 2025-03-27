@@ -23,7 +23,7 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateSongDto } from './dto/update-song-dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { JwtArtistGuard } from '../auth/jwt-artist.guard';
-import { PayloadType } from '../auth/payload.type';
+import { PayloadType } from '../auth/auth.types';
 
 @Controller({ path: 'songs', scope: Scope.REQUEST })
 export class SongsController {

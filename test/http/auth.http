@@ -48,3 +48,16 @@ Content-Type: application/json
 ### Enable 2fa
 GET {{baseUrl}}/auth/enable-2fa
 Authorization: Bearer {{authToken}}
+
+### Disable 2fa
+GET {{baseUrl}}/auth/disable-2fa
+Authorization: Bearer {{authToken}}
+
+### Validate 2FA Token
+POST http://localhost:3000/auth/validate-2fa
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "token": "755052"
+}
