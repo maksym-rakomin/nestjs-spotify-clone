@@ -1,0 +1,13 @@
+### Create PLAYLIST REQUEST
+POST {{baseUrl}}/playlists
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "name": "My Fav Songs",
+  "user": 1,
+  "songs": [
+    10,
+    12
+  ]
+}

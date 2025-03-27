@@ -1,0 +1,50 @@
+### Create USER
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "john",
+  "lastName": "doe",
+  "email": "john@gmail.com",
+  "password": "123456"
+}
+
+### Create ARTIST
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "Artist",
+  "lastName": "doe",
+  "email": "artist@gmail.com",
+  "password": "123456"
+}
+
+### login ARTIST
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "artist@gmail.com",
+  "password": "123456"
+}
+
+> {% client.global.set("authToken", response.body.accessToken); %}
+
+
+### Test login user
+# @name login user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@gmail.com",
+  "password": "123456"
+}
+
+> {% client.global.set("authToken", response.body.accessToken); %}
+
+
+### Enable 2fa
+GET {{baseUrl}}/auth/enable-2fa
+Authorization: Bearer {{authToken}}

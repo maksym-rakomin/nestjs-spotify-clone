@@ -1,0 +1,3 @@
+### GET profile
+GET {{baseUrl}}/profile
+Authorization: Bearer {{authToken}}
