@@ -8,6 +8,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt-strategy';
 import { JwtAuthGuard } from './jwt-guard';
 import { ArtistsModule } from '../artists/artists.module';
+import { ApiKeyStrategy } from './api-key-strategy';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { ArtistsModule } from '../artists/artists.module';
     PassportModule,
     ArtistsModule,
   ],
-  providers: [AuthService, JwtStrategy, JwtAuthGuard],
+  providers: [AuthService, JwtStrategy, JwtAuthGuard, ApiKeyStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

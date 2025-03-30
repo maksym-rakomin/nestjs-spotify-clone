@@ -32,7 +32,7 @@ Content-Type: application/json
 > {% client.global.set("authToken", response.body.accessToken); %}
 
 
-### Test login user
+### login user
 # @name login user
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
@@ -61,3 +61,8 @@ Content-Type: application/json
 {
   "token": "755052"
 }
+
+
+### Access Profile
+GET http://localhost:3000/auth/profile
+Authorization: Bearer 59b422b2-c366-4602-b52a-3533eaaa4318
