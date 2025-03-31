@@ -34,4 +34,7 @@ export class User {
 
   @Column({ type: 'uuid' })
   apiKey: string;
+
+  // @Column()
+  // phone: string;
 }

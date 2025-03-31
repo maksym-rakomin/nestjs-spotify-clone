@@ -8,14 +8,11 @@ import { DevConfigService } from './common/providers/DevConfigService';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as process from 'node:process';
 import { DataSource } from 'typeorm';
-import { Song } from './songs/song.entity';
-import { Artist } from './artists/artist.entity';
-import { User } from './users/user.entity';
-import { Playlist } from './playlists/playlist.entity';
 import { PlayListModule } from './playlists/playlist.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
+import { dataSourceOptions } from '../db/data-source';
 
 // Development configuration
 const devConfig = { port: 3000 };
@@ -25,15 +22,7 @@ const proConfig = { port: 4000 };
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      database: 'spotify-clone',
-      host: 'localhost',
-      port: 5432,
-      type: 'postgres',
-      password: process.env.DB_PASSWORD,
-      entities: [Song, Artist, User, Playlist],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     SongsModule,
     PlayListModule,
     AuthModule,
