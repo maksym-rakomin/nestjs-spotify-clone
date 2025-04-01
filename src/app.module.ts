@@ -12,8 +12,10 @@ import { PlayListModule } from './playlists/playlist.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
-import { dataSourceOptions } from '../db/data-source';
+import { typeOrmAsyncConfig } from '../db/data-source';
 import { SeedModule } from './seed/seed.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 // Development configuration
 const devConfig = { port: 3000 };
@@ -23,7 +25,12 @@ const proConfig = { port: 4000 };
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(dataSourceOptions),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development', '.env.production'],
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     SongsModule,
     PlayListModule,
     AuthModule,
@@ -44,9 +51,10 @@ const proConfig = { port: 4000 };
   ],
 })
 export class AppModule implements NestModule {
-  constructor(private dataSource: DataSource) {
-    console.log('DB name -', dataSource.options.database);
+  constructor(private typeOrmAsyncConfig: DataSource) {
+    console.log('DB name -', typeOrmAsyncConfig.options.database);
   }
+
   configure(consumer: MiddlewareConsumer) {
     // consumer.apply(LoggerMiddleware).forRoutes('songs/*'); // option 1
     // consumer

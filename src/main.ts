@@ -2,6 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+
 // import { SeedService } from './seed/seed.service';
 
 async function bootstrap() {
@@ -11,7 +13,8 @@ async function bootstrap() {
   // const seedService = app.get(SeedService);
   // await seedService.seed();
 
-  await app.listen(process.env.PORT ?? 3000);
+  const configService = app.get(ConfigService); // get the instance of ConfigService using app.get
+  await app.listen(configService.get<number>('port') ?? 3000);
 }
 
 bootstrap();
