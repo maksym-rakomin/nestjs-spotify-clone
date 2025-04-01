@@ -4,6 +4,10 @@ import {
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { User } from '../src/users/user.entity';
+import { Playlist } from '../src/playlists/playlist.entity';
+import { Song } from '../src/songs/song.entity';
+import { Artist } from '../src/artists/artist.entity';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -12,7 +16,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.USERNAME,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  entities: ['dist/**/*.entity.js'],
+  entities: [User, Playlist, Song, Artist],
   synchronize: false,
   migrations: ['dist/db/migrations/*.js'],
 };
@@ -28,7 +32,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: configService.get<string>('username'),
       database: configService.get<string>('dbName'),
       password: configService.get<string>('password'),
-      entities: ['dist/**/*.entity.js'],
+      entities: [User, Playlist, Song, Artist],
       synchronize: false,
       migrations: ['dist/db/migrations/*.js'],
     };

@@ -3,8 +3,14 @@ import { AppModule } from './app.module';
 import { FastifyAdapter } from '@nestjs/platform-fastify';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-
 // import { SeedService } from './seed/seed.service';
+
+declare const module: {
+  hot?: {
+    accept: () => void;
+    dispose: (callback?: () => Promise<void>) => void;
+  };
+};
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new FastifyAdapter());
@@ -15,6 +21,11 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService); // get the instance of ConfigService using app.get
   await app.listen(configService.get<number>('port') ?? 3000);
+
+  if (module?.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 
 bootstrap();
