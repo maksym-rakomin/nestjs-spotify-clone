@@ -1,3 +1,1 @@
-export const authConstants = {
-  secret: 'HAD_12X#@',
-};
+export const JWT_AUTH = 'JWT-auth';
