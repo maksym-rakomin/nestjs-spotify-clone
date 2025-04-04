@@ -15,7 +15,8 @@ declare const module: {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, new FastifyAdapter());
+  // const app = await NestFactory.create(AppModule, new FastifyAdapter());
+  const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
   // const seedService = app.get(SeedService);
