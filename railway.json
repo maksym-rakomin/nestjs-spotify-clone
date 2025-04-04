@@ -1,3 +1,0 @@
-{
-  "build": "npm ci --omit=dev && npm run build"
-}
