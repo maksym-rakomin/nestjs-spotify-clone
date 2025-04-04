@@ -15,31 +15,44 @@ declare const module: {
 };
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, new FastifyAdapter());
-  app.useGlobalPipes(new ValidationPipe());
+  const app = await NestFactory.create(AppModule, new FastifyAdapter(), {
+    // Оптимизация производительности
+    logger: ['error', 'warn'],
+    bodyParser: true,
+    cors: true,
+  });
+
+  // Глобальные настройки
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  }));
 
   // const seedService = app.get(SeedService);
   // await seedService.seed();
 
-  //Configure the swagger module here
-  const config = new DocumentBuilder()
-    .setTitle('Spotify Clone')
-    .setDescription('The Spotify Clone Api documentation')
-    .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Enter JWT token',
-        in: 'header',
-      },
-      JWT_AUTH,
-    )
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // Настройка Swagger только в development
+  if (process.env.NODE_ENV !== 'production') {
+    const config = new DocumentBuilder()
+      .setTitle('Spotify Clone')
+      .setDescription('The Spotify Clone Api documentation')
+      .setVersion('1.0')
+      .addBearerAuth(
+        {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          name: 'JWT',
+          description: 'Enter JWT token',
+          in: 'header',
+        },
+        JWT_AUTH,
+      )
+      .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
+  }
 
   const configService = app.get(ConfigService); // get the instance of ConfigService using app.get
   await app.listen(configService.get<number>('port') ?? 3000);
