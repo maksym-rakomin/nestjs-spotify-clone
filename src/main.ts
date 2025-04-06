@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { JWT_AUTH } from './auth/auth.constants';
-import { SeedService } from './seed/seed.service';
+// import { SeedService } from './seed/seed.service';
 
 declare const module: {
   hot?: {
@@ -15,12 +15,13 @@ declare const module: {
 };
 
 async function bootstrap() {
-  // const app = await NestFactory.create(AppModule, new FastifyAdapter());
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, new FastifyAdapter());
+  // const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  const seedService = app.get(SeedService);
-  await seedService.seed();
+  // Seeding DB
+  // const seedService = app.get(SeedService);
+  // await seedService.seed();
 
   //Configure the swagger module here
   const config = new DocumentBuilder()
