@@ -71,8 +71,11 @@ export class AuthService {
     }
 
     const secret = speakeasy.generateSecret();
-    console.log(secret);
+
     user.twoFASecret = secret.base32;
+    if (!user.twoFASecret) {
+      throw new UnauthorizedException('Two factor authentication not enabled');
+    }
     await this.userService.updateSecretKey(user.id, user.twoFASecret);
     return { secret: user.twoFASecret };
   }

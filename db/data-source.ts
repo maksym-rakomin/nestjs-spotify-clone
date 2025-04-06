@@ -8,8 +8,11 @@ import { User } from '../src/users/user.entity';
 import { Playlist } from '../src/playlists/playlist.entity';
 import { Song } from '../src/songs/song.entity';
 import { Artist } from '../src/artists/artist.entity';
+import * as process from 'node:process';
+require('dotenv').config();
 
 export const dataSourceOptions: DataSourceOptions = {
+  // url: 'postgresql://postgres:LULCnfxYqYWmGnaPaLMvnVgetGvOciZc@caboose.proxy.rlwy.net:17527/railway',
   type: 'postgres',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || '5432'),
