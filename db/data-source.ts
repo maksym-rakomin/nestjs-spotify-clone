@@ -9,7 +9,7 @@ import { Playlist } from '../src/playlists/playlist.entity';
 import { Song } from '../src/songs/song.entity';
 import { Artist } from '../src/artists/artist.entity';
 import * as process from 'node:process';
-require('dotenv').config();
+import 'dotenv/config';
 
 export const dataSourceOptions: DataSourceOptions = {
   // url: 'postgresql://postgres:LULCnfxYqYWmGnaPaLMvnVgetGvOciZc@caboose.proxy.rlwy.net:17527/railway',
@@ -28,6 +28,11 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: (configService: ConfigService): TypeOrmModuleOptions => {
+    console.log(111, configService.get<string>('password'));
+    console.log(111, configService.get<string>('dbHost'));
+    console.log(111, configService.get<string>('dbPort'));
+    console.log(111, configService.get<string>('username'));
+    console.log(111, configService.get<string>('dbName'));
     return {
       type: 'postgres',
       host: configService.get<string>('dbHost'),
