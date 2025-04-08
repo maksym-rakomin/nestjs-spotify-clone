@@ -10,10 +10,18 @@
 
 export class CreateSongInput {
     title: string;
+    artists: Nullable<number>[];
+    releasedDate: string;
+    duration: string;
+    lyrics?: Nullable<string>;
 }
 
 export class UpdateSongInput {
     title?: Nullable<string>;
+    artists?: Nullable<Nullable<number>[]>;
+    releasedDate?: Nullable<string>;
+    duration?: Nullable<string>;
+    lyrics?: Nullable<string>;
 }
 
 export class Song {
