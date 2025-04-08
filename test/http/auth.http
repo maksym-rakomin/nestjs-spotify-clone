@@ -3,9 +3,9 @@ POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 
 {
-  "firstName": "john",
-  "lastName": "doe",
-  "email": "john@gmail.com",
+  "firstName": "john1",
+  "lastName": "doe1",
+  "email": "john1@gmail.com",
   "password": "123456"
 }
 
@@ -25,7 +25,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "artist@gmail.com",
+  "email": "john1@gmail.com",
   "password": "123456"
 }
 

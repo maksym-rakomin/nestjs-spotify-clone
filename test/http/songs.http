@@ -15,7 +15,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "You for Me 12",
+  "title": "You for Me 5",
   "artists": [
     1
   ],

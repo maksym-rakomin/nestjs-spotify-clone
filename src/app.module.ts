@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { join } from 'node:path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SongsModule } from './songs/songs.module';
@@ -18,6 +19,8 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { validate } from '../.env.validation';
 import { EventsModule } from './events/events.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
 
 // Development configuration
 const devConfig = { port: 3000 };
@@ -41,6 +44,14 @@ const proConfig = { port: 4000 };
     ArtistsModule,
     SeedModule,
     EventsModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      typePaths: ['./**/*.graphql'],
+      definitions: {
+        path: join(process.cwd(), 'src/graphql.ts'),
+        outputAs: 'class',
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [

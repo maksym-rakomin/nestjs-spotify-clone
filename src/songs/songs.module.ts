@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Song } from './song.entity';
 import { User } from '../users/user.entity';
 import { Artist } from '../artists/artist.entity';
+import { SongsResolver } from './songs.resolver';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Song, Artist, User])],
@@ -20,6 +21,7 @@ import { Artist } from '../artists/artist.entity';
       provide: 'CONNECTION',
       useValue: connection,
     },
+    SongsResolver,
   ],
 })
 export class SongsModule {}
