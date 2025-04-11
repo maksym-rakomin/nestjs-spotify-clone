@@ -1,7 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
-import { LoginInput, SingUpInput, SingUpResponse } from '../graphql';
+import { LoginInput, Profile, SingUpInput, SingUpResponse } from '../graphql';
+import { UseGuards } from '@nestjs/common';
+import { GraphQLJwtAuthGuard } from './gql-jwt-guard';
 
 @Resolver()
 export class AuthResolver {
@@ -37,5 +39,20 @@ export class AuthResolver {
         ...result,
       };
     }
+  }
+
+  @Query('profile')
+  @UseGuards(GraphQLJwtAuthGuard)
+  getProfile(
+    parent,
+    args,
+    contextValue: { req: { user?: Profile } },
+    info,
+  ): Profile {
+    if (!contextValue?.req?.user) {
+      throw new Error('Unauthorized');
+    }
+
+    return contextValue.req.user;
   }
 }

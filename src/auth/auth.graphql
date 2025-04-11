@@ -8,10 +8,16 @@ type User {
 
 type Query {
     login(loginInput: LoginInput!): LoginResponse!
+    profile: Profile!
 }
 
 type Mutation {
     singup(singUpInput: SingUpInput!): SingUpResponse!
+}
+
+type Profile {
+    email: String!
+    userId: String!
 }
 
 input SingUpInput {

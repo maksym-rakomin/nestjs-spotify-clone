@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -46,6 +47,8 @@ export class User {
 export abstract class IQuery {
     abstract login(loginInput: LoginInput): LoginResponse | Promise<LoginResponse>;
 
+    abstract profile(): Profile | Promise<Profile>;
+
     abstract songs(): Song[] | Promise<Song[]>;
 
     abstract song(id: string): Song | Promise<Song>;
@@ -59,6 +62,11 @@ export abstract class IMutation {
     abstract updateSong(id: string, updateSongInput: UpdateSongInput): UpdateResult | Promise<UpdateResult>;
 
     abstract deleteSong(id: string): DeleteResult | Promise<DeleteResult>;
+}
+
+export class Profile {
+    email: string;
+    userId: string;
 }
 
 export class SingUpResponse {
