@@ -9,6 +9,7 @@ import { JwtAuthGuard } from './jwt-guard';
 import { ArtistsModule } from '../artists/artists.module';
 import { ApiKeyStrategy } from './api-key-strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthResolver } from './auth.resolver';
 
 @Module({
   imports: [
@@ -26,7 +27,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     PassportModule,
     ArtistsModule,
   ],
-  providers: [AuthService, JwtStrategy, JwtAuthGuard, ApiKeyStrategy],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    JwtAuthGuard,
+    ApiKeyStrategy,
+    AuthResolver,
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })

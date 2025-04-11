@@ -1,5 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { join } from 'node:path';
+import { Request } from 'express';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SongsModule } from './songs/songs.module';
@@ -51,6 +52,7 @@ const proConfig = { port: 4000 };
         path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',
       },
+      context: ({ req }: { req: Request }) => ({ req }),
     }),
   ],
   controllers: [AppController],
