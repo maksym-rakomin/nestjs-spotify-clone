@@ -53,6 +53,7 @@ const proConfig = { port: 4000 };
         outputAs: 'class',
       },
       context: ({ req }: { req: Request }) => ({ req }),
+      installSubscriptionHandlers: true,
     }),
   ],
   controllers: [AppController],

@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { SongsService } from './songs.service';
 import { Song } from './song.entity';
 import { HttpStatus, ParseIntPipe } from '@nestjs/common';
@@ -6,6 +6,9 @@ import { CreateSongDto } from './dto/create-song-dto';
 import { UpdateSongDto } from './dto/update-song-dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { GraphQLError } from 'graphql/error';
+import { PubSub, PubSubEngine } from 'graphql-subscriptions';
+
+const pubSub: PubSubEngine = new PubSub();
 
 @Resolver()
 export class SongsResolver {
@@ -35,11 +38,13 @@ export class SongsResolver {
   }
 
   @Mutation('createSong')
-  createSong(
+  async createSong(
     @Args('createSongInput')
     args: CreateSongDto,
   ): Promise<Song> {
-    return this.songsService.create(args);
+    const newSong = await this.songsService.create(args);
+    await pubSub.publish('songCreated', { songCreated: newSong });
+    return newSong;
   }
 
   @Mutation('updateSong')
@@ -64,5 +69,10 @@ export class SongsResolver {
     id: number,
   ): Promise<DeleteResult> {
     return this.songsService.delete(id);
+  }
+
+  @Subscription('songCreated')
+  songCreated() {
+    return pubSub.asyncIterableIterator('songCreated');
   }
 }
