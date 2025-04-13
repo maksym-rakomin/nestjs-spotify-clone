@@ -22,7 +22,8 @@ import { validate } from '../.env.validation';
 import { EventsModule } from './events/events.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-
+import responseCachePlugin from '@apollo/server-plugin-response-cache';
+import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheControl';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -52,6 +53,10 @@ const proConfig = { port: 4000 };
         path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',
       },
+      plugins: [
+        ApolloServerPluginCacheControl({ defaultMaxAge: 5 }),
+        responseCachePlugin(),
+      ],
       context: ({ req }: { req: Request }) => ({ req }),
       installSubscriptionHandlers: true,
     }),
