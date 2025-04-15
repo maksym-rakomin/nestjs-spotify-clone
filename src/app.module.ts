@@ -65,7 +65,7 @@ const dataSources = () => ({
       ],
       context: ({ req }: { req: Request }) => ({
         req,
-        dataSources,
+        dataSources: dataSources(),
       }),
       installSubscriptionHandlers: true,
     }),
