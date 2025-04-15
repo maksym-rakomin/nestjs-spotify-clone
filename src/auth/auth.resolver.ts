@@ -43,12 +43,7 @@ export class AuthResolver {
 
   @Query('profile')
   @UseGuards(GraphQLJwtAuthGuard)
-  getProfile(
-    parent,
-    args,
-    contextValue: { req: { user?: Profile } },
-    info,
-  ): Profile {
+  getProfile(parent, args, contextValue: { req: { user?: Profile } }): Profile {
     if (!contextValue?.req?.user) {
       throw new Error('Unauthorized');
     }
