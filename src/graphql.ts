@@ -57,6 +57,8 @@ export abstract class IQuery {
     abstract songs(): Song[] | Promise<Song[]>;
 
     abstract song(id: string): Song | Promise<Song>;
+
+    abstract todos(): Todo[] | Promise<Todo[]>;
 }
 
 export abstract class IMutation {
@@ -102,6 +104,13 @@ export class UpdateResult {
 
 export class DeleteResult {
     affected: number;
+}
+
+export class Todo {
+    id: string;
+    userId: number;
+    title: string;
+    completed?: Nullable<boolean>;
 }
 
 export type LoginResponse = AccessTokenResponse | Validate2FAResponse;

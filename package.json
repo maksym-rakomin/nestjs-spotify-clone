@@ -25,6 +25,7 @@
     "generate:typings": "ts-node generate-typings.ts"
   },
   "dependencies": {
+    "@apollo/datasource-rest": "^6.4.1",
     "@apollo/server": "^4.12.0",
     "@apollo/server-plugin-response-cache": "^4.1.4",
     "@as-integrations/fastify": "^2.1.1",
