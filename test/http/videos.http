@@ -1,0 +1,28 @@
+### SEND FETCH SONGS REQUEST
+GET {{baseUrl}}/videos?page=1&limit=20
+
+
+### Find SONGS REQUEST
+GET {{baseUrl}}/videos/2
+
+
+### Create New VIDEO REQUEST
+POST {{baseUrl}}/videos
+Content-Type: application/json
+
+{
+  "title": "Video 1"
+}
+
+
+### Update SONGS REQUEST
+PATCH {{baseUrl}}/videos/2
+Content-Type: application/json
+
+{
+  "title": "You for Me 222"
+}
+
+### DELETE SONGS REQUEST
+DELETE {{baseUrl}}/songs/2
+

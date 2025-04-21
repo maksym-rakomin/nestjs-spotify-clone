@@ -26,6 +26,7 @@ import responseCachePlugin from '@apollo/server-plugin-response-cache';
 import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheControl';
 import { TodoModule } from './todo/todo.module';
 import { TodoService } from './todo/todo.service';
+import { VideosModule } from './videos/videos.module';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -70,6 +71,7 @@ const dataSources = () => ({
       installSubscriptionHandlers: true,
     }),
     TodoModule,
+    VideosModule,
   ],
   controllers: [AppController],
   providers: [
