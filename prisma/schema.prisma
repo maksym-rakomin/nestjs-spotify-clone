@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated/client"
+  // output   = "./generated/client"
 }
 
 datasource db {
@@ -15,6 +15,14 @@ datasource db {
 }
 
 model Video {
-  id        Int      @id @default(autoincrement())
-  title     String
+  id            Int          @id @default(autoincrement())
+  title         String
+  VideoArtist   VideoArtist? @relation(fields: [videoArtistId], references: [id])
+  videoArtistId Int?
+}
+
+model VideoArtist {
+  id     Int     @id @default(autoincrement())
+  name   String
+  videos Video[]
 }

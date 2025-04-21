@@ -3,7 +3,7 @@ GET {{baseUrl}}/videos?page=1&limit=20
 
 
 ### Find SONGS REQUEST
-GET {{baseUrl}}/videos/2
+GET {{baseUrl}}/videos/3
 
 
 ### Create New VIDEO REQUEST
@@ -11,7 +11,8 @@ POST {{baseUrl}}/videos
 Content-Type: application/json
 
 {
-  "title": "Video 1"
+  "title": "Video 1",
+  "videoArtistId": 1
 }
 
 
@@ -25,4 +26,14 @@ Content-Type: application/json
 
 ### DELETE SONGS REQUEST
 DELETE {{baseUrl}}/songs/2
+
+
+### ----------------- ###
+### Create New Artist REQUEST
+POST {{baseUrl}}/video-artist
+Content-Type: application/json
+
+{
+  "name": "Merlin"
+}
 

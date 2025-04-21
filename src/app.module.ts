@@ -27,6 +27,7 @@ import { ApolloServerPluginCacheControl } from '@apollo/server/plugin/cacheContr
 import { TodoModule } from './todo/todo.module';
 import { TodoService } from './todo/todo.service';
 import { VideosModule } from './videos/videos.module';
+import { VideoArtistModule } from './video-artist/video-artist.module';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -72,6 +73,7 @@ const dataSources = () => ({
     }),
     TodoModule,
     VideosModule,
+    VideoArtistModule,
   ],
   controllers: [AppController],
   providers: [

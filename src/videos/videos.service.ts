@@ -6,14 +6,16 @@ import { PrismaService } from 'src/prisma.service';
 export class VideosService {
   constructor(private prisma: PrismaService) {}
 
-  create(createVideoDto: Prisma.VideoCreateInput): Promise<Video> {
+  create(createVideoDto: Prisma.VideoUncheckedCreateInput): Promise<Video> {
     return this.prisma.video.create({
       data: createVideoDto,
     });
   }
 
   findAll() {
-    return this.prisma.video.findMany();
+    return this.prisma.video.findMany({
+      include: { VideoArtist: true },
+    });
   }
 
   findOne(where: Prisma.VideoWhereUniqueInput): Promise<Video | null> {
