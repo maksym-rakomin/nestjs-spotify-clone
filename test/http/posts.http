@@ -1,0 +1,77 @@
+### SEND FETCH SONGS REQUEST
+GET {{baseUrl}}/posts
+
+### FETCH ALL THE POSTS WITH NEST.JS CATEGORY
+GET {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "categories": {
+    "some": {
+      "category": {
+        "name": "Nest.js"
+      }
+    }
+  }
+}
+
+
+### Create POST
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "One to Many Relation",
+  "categories": {
+    "create": [
+      {
+        "assignedBy": "Jane",
+        "asignedAt": "2023-08-01T10:03:38.016Z",
+        "category": {
+          "create": {
+            "name": "Prisma"
+          }
+        }
+      },
+      {
+        "assignedBy": "Jane",
+        "asignedAt": "2023-08-01T10:03:38.016Z",
+        "category": {
+          "create": {
+            "name": "Nest.js"
+          }
+        }
+      }
+    ]
+  }
+}
+
+### Create POST with existing categories
+POST {{baseUrl}}/posts
+Content-Type: application/json
+
+{
+  "title": "Transactions in Prisma",
+  "categories": {
+    "create": [
+      {
+        "assignedBy": "Bob",
+        "asignedAt": "2023-08-01T10:07:00.918Z",
+        "category": {
+          "connect": {
+            "id": 1
+          }
+        }
+      },
+      {
+        "assignedBy": "Bob",
+        "asignedAt": "2023-08-01T10:07:00.918Z",
+        "category": {
+          "connect": {
+            "id": 2
+          }
+        }
+      }
+    ]
+  }
+}

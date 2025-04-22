@@ -29,6 +29,7 @@ import { TodoService } from './todo/todo.service';
 import { VideosModule } from './videos/videos.module';
 import { VideoArtistModule } from './video-artist/video-artist.module';
 import { IUsersModule } from './i-users/i-users.module';
+import { PostsModule } from './posts/posts.module';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -76,6 +77,7 @@ const dataSources = () => ({
     VideosModule,
     VideoArtistModule,
     IUsersModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [
