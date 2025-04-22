@@ -1,5 +1,5 @@
 ### SEND FETCH SONGS REQUEST
-GET {{baseUrl}}/videos?page=1&limit=20
+GET {{baseUrl}}/videos
 
 
 ### Find SONGS REQUEST
@@ -28,7 +28,6 @@ Content-Type: application/json
 DELETE {{baseUrl}}/songs/2
 
 
-### ----------------- ###
 ### Create New Artist REQUEST
 POST {{baseUrl}}/video-artist
 Content-Type: application/json
@@ -36,4 +35,19 @@ Content-Type: application/json
 {
   "name": "Merlin"
 }
+
+### Create New USER REQUEST
+POST {{baseUrl}}/i-users
+Content-Type: application/json
+
+{
+  "name": "user 1",
+  "photo": "some-api/photos/1.jpg",
+  "phone": "1234123434"
+}
+
+### SEND FETCH users REQUEST
+GET {{baseUrl}}/i-users
+
+
 
