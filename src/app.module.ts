@@ -33,6 +33,8 @@ import { PostsModule } from './posts/posts.module';
 import { PrismaService } from './prisma.service';
 import { ApplicationModule } from './application/application.module';
 import { AccountsModule } from './accounts/accounts.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TaskService } from './task/task.service';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -83,6 +85,7 @@ const dataSources = () => ({
     PostsModule,
     ApplicationModule,
     AccountsModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [
@@ -95,6 +98,7 @@ const dataSources = () => ({
       },
     },
     PrismaService,
+    TaskService,
   ],
 })
 export class AppModule implements NestModule {
