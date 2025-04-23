@@ -30,6 +30,8 @@ import { VideosModule } from './videos/videos.module';
 import { VideoArtistModule } from './video-artist/video-artist.module';
 import { IUsersModule } from './i-users/i-users.module';
 import { PostsModule } from './posts/posts.module';
+import { PrismaService } from './prisma.service';
+import { ApplicationModule } from './application/application.module';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -78,6 +80,7 @@ const dataSources = () => ({
     VideoArtistModule,
     IUsersModule,
     PostsModule,
+    ApplicationModule,
   ],
   controllers: [AppController],
   providers: [
@@ -89,6 +92,7 @@ const dataSources = () => ({
         return process.env.NODE_ENV === 'development' ? devConfig : proConfig;
       },
     },
+    PrismaService,
   ],
 })
 export class AppModule implements NestModule {

@@ -1,0 +1,24 @@
+### CREATE NEW Sequential
+GET {{baseUrl}}/sequential
+Content-Type: application/json
+
+//{
+//  "email": "jane1@gmail.com",
+//  "name": "Jone Doe",
+//  "address": {
+//    "create": {
+//      "city": "New York",
+//      "country": "USA",
+//      "zip": "34443"
+//    }
+//  },
+//  "applications": {
+//    "create": [
+//      {
+//        "amount": 32224,
+//        "tenure": "5 Years",
+//        "type": "BUSINESS_FINANCING"
+//      }
+//    ]
+//  }
+//}
