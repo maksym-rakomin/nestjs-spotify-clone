@@ -1,0 +1,19 @@
+### CREATE NEW APPLICATION
+POST {{baseUrl}}/accounts
+Content-Type: application/json
+
+{
+  "title": "Sam",
+  "balance": 10
+}
+
+
+### Trasnfer Amount
+POST http://localhost:3000/accounts/transfer
+Content-Type: application/json
+
+{
+  "sender": 1,
+  "receiver": 2,
+  "amount": 50
+}

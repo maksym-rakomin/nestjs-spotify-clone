@@ -32,6 +32,7 @@ import { IUsersModule } from './i-users/i-users.module';
 import { PostsModule } from './posts/posts.module';
 import { PrismaService } from './prisma.service';
 import { ApplicationModule } from './application/application.module';
+import { AccountsModule } from './accounts/accounts.module';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -81,6 +82,7 @@ const dataSources = () => ({
     IUsersModule,
     PostsModule,
     ApplicationModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [
