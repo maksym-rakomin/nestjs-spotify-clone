@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateApplicationDto } from './dto/create-application.dto';
 import { UpdateApplicationDto } from './dto/update-application.dto';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
@@ -7,8 +6,17 @@ import { PrismaService } from '../prisma.service';
 @Injectable()
 export class ApplicationService {
   constructor(private prisma: PrismaService) {}
-  create(createApplicationDto: Prisma.CustomerCreateInput) {
-    return this.prisma.customer.create({ data: createApplicationDto });
+
+  async create(createApplicationDto: Prisma.CustomerCreateInput) {
+    try {
+      return await this.prisma.customer.create({ data: createApplicationDto });
+    } catch (error) {
+      console.log(111, error);
+      return {
+        statusCode: 505,
+        message: error.message,
+      };
+    }
   }
 
   findAll() {
