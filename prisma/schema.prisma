@@ -64,3 +64,35 @@ model CategoriesOnPosts {
 
   @@id([postId, categoryId])
 }
+
+model Customer {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  address      Address?      @relation(fields: [addressId], references: [id])
+  applications Application[]
+  addressId    Int?          @unique
+}
+
+model Address {
+  id       Int       @id @default(autoincrement())
+  zip      String?
+  city     String
+  country  String
+  Customer Customer?
+}
+
+enum APPLICATION_TYPE {
+  LOAN
+  CAR_FINANCING
+  BUSINESS_FINANCING
+}
+
+model Application {
+  id         Int              @id @default(autoincrement())
+  type       APPLICATION_TYPE @default(LOAN)
+  tenure     String
+  amount     Int
+  Customer   Customer?        @relation(fields: [customerId], references: [id])
+  customerId Int?
+}
