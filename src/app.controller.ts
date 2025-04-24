@@ -5,6 +5,7 @@ import {
   ParseFilePipeBuilder,
   Post,
   Req,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -16,6 +17,7 @@ import { JWT_AUTH } from './auth/auth.constants';
 import { PrismaService } from './prisma.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Request, Response } from 'express';
 
 @Controller()
 export class AppController {
@@ -83,5 +85,20 @@ export class AppController {
     return {
       message: 'file uploaded successfully!',
     };
+  }
+
+  @Get('set-cookie')
+  setCookie(
+    @Res({ passthrough: true })
+    response: Response,
+  ) {
+    response.cookie('token', 'encrypted cookie string');
+    response.send('Cookie Saved Successfully');
+  }
+
+  @Get('get-cookie')
+  findAll(@Req() req: Request) {
+    console.log(req.cookies);
+    return req.cookies;
   }
 }

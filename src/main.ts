@@ -5,6 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { JWT_AUTH } from './auth/auth.constants';
+import * as cookieParser from 'cookie-parser';
 // import { SeedService } from './seed/seed.service';
 
 declare const module: {
@@ -18,6 +19,7 @@ async function bootstrap() {
   // const app = await NestFactory.create(AppModule, new FastifyAdapter());
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.use(cookieParser());
 
   // Seeding DB
   // const seedService = app.get(SeedService);
