@@ -35,6 +35,8 @@ import { ApplicationModule } from './application/application.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TaskService } from './task/task.service';
+import { AudioModule } from './audio/audio.module';
+import { BullModule } from '@nestjs/bull';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -86,6 +88,13 @@ const dataSources = () => ({
     ApplicationModule,
     AccountsModule,
     ScheduleModule.forRoot(),
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    AudioModule,
   ],
   controllers: [AppController],
   providers: [
