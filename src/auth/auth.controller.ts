@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Request,
+  Session,
   UseGuards,
 } from '@nestjs/common';
 import { User } from 'src/users/user.entity';
@@ -41,7 +42,8 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body() loginDTO: LoginDTO) {
+  login(@Body() loginDTO: LoginDTO, @Session() session: Record<string, any>) {
+    session.user = loginDTO;
     return this.authService.login(loginDTO);
   }
 
@@ -85,5 +87,16 @@ export class AuthController {
     user: any;
   } {
     return { msg: 'authenticated with api key', user: classToPlain(req.user) };
+  }
+
+  @Get('profile2')
+  profile(@Session() session: Record<string, any>) {
+    const user = session.user;
+    console.log(111, user);
+    if (user) {
+      return `Hello, ${user.email}`;
+    } else {
+      return 'Not logged in';
+    }
   }
 }
