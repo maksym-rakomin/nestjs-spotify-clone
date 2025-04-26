@@ -37,6 +37,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TaskService } from './task/task.service';
 import { AudioModule } from './audio/audio.module';
 import { BullModule } from '@nestjs/bull';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 // Development configuration
 const devConfig = { port: 3000 };
 
@@ -95,6 +96,7 @@ const dataSources = () => ({
       },
     }),
     AudioModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [
